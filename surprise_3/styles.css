@@ -1,0 +1,101 @@
+/* Text Style */
+/* Container for centering text */
+.container-fluid {
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Align items vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    height: 100%; /* Full height of the viewport */
+    text-align: center; /* Center text alignment */
+}
+
+/* Existing styles */
+.red-text {
+    font-family: 'Pacifico', cursive; /* Ensures fallback */
+    color: red;
+    font-size: 46px;
+}
+
+/* Other existing styles remain unchanged */
+
+.red-text {
+    font-family: 'Pacifico', cursive; /* Ensures fallback */
+    color: red;
+    font-size: 46px;
+    line-height: 1.5; /* Adjust this value to control spacing */
+}
+
+
+/* Body and HTML Settings */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("http://santhosh.comxa.com/dsm/moonlight.jpg");
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-color: #000; /* Fallback color */
+    color: #999;
+    font: 100%/18px helvetica, arial, sans-serif;
+}
+
+/* List Reset */
+ul, li {
+    text-indent: 0;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Image Reset */
+img {
+    border: 0;
+}
+
+/* Canvas Styles */
+canvas {
+    cursor: crosshair;
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 20; /* Stays above other content */
+}
+
+/* Header and Background Settings */
+#header img {
+    width: 100%; 
+    height: auto; /* Maintains aspect ratio */
+}
+
+#bg img {
+    width: 100%; 
+    height: auto; /* Maintains aspect ratio */
+}
+
+#header, #bg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Background under header */
+}
+
+#header {
+    top: 0;
+}
+
+#bg {
+    position: fixed;
+    z-index: 1; /* Background layer */
+    bottom: 0;
+}
+
+/* Audio Controls */
+audio {
+    position: fixed;
+    display: none; /* Hidden by default */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 5; /* Above background but below canvas */
+}
