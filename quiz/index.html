@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Quiz Game</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(to bottom, #fceff9, #fadadd);
+            color: #5e3056;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1,
+        h2 {
+            font-family: 'Great Vibes', cursive;
+            color: #ba5370;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .button {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-family: 'Lora', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(45deg, #ff6a88, #f58fb5);
+            transform: scale(1.1);
+        }
+
+        .images {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+
+        .images div {
+            position: relative;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        input[type="checkbox"] {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            transform: scale(1.5);
+            accent-color: #ff6a88;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .feedback {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            animation: fade 0.5s ease-in-out;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .images {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Landing Screen -->
+        <div id="landing" class="screen">
+            <h1>Let's play a game!</h1>
+            <img src="st.jpeg" alt="Romantic Background" style="width: 100%; border-radius: 15px; margin-bottom: 20px;">
+            <button class="button" onclick="startGame()">Continue</button>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question" class="screen hidden">
+            <h2 id="question-text">Which one is your favorite place?</h2>
+            <div class="images">
+                <div>
+                    <img src="1.1.jpeg" alt="Option 1" onclick="checkAnswer(1)">
+                </div>
+                <div>
+                    <img src="1.2.jpeg" alt="Option 2" onclick="checkAnswer(2)">
+                </div>
+            </div>
+            <p id="feedback" class="feedback"></p>
+        </div>
+
+        <!-- Correct Answer Screen for Last Question -->
+        <div id="last-question" class="screen hidden">
+            <h2>The correct answer is:</h2>
+            <div id="correct-answer-image">
+                <img src="5.jpeg" alt="Romantic Background"
+                    style="width: 100%; border-radius: 15px; margin-bottom: 20px;">
+            </div>
+            <button class="button" onclick="endGame()">Next</button>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end" class="screen hidden">
+            <h1>Thank you for playing!</h1>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                text: "Where is the tree?",
+                correct: 2,
+                images: ["1.1.jpeg", "1.2.jpeg"]
+            },
+            {
+                text: "Where is Sugar?",
+                correct: 2,
+                images: ["2.1.jpeg", "2.2.jpeg"]
+            },
+            {
+                text: "Where is honey?",
+                correct: 1,
+                images: ["3.1.jpeg", "3.2.jpeg"]
+            },
+            {
+                text: "Where is moon?",
+                images: ["4.1.jpeg", "4.2.jpeg"]
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function startGame() {
+            document.getElementById('landing').classList.add('hidden');
+            document.getElementById('question').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                document.getElementById('question').classList.add('hidden');
+                document.getElementById('last-question').classList.remove('hidden');
+                showCorrectAnswer();
+                return;
+            }
+
+            const q = questions[currentQuestion];
+            document.getElementById('question-text').textContent = q.text;
+
+            document.querySelectorAll('.images div').forEach((div, index) => {
+                div.querySelector('img').src = q.images[index];
+            });
+        }
+
+        function checkAnswer(selected) {
+            const q = questions[currentQuestion];
+            const feedback = document.getElementById('feedback');
+
+            // For the last question, make both answers incorrect
+            if (currentQuestion === questions.length - 1) {
+                feedback.textContent = "Neither is correct!";
+                feedback.style.color = "#f44336";
+            } else {
+                if (selected === q.correct) {
+                    feedback.textContent = "Correct!";
+                    feedback.style.color = "#4caf50";
+                } else {
+                    feedback.textContent = "Wrong answer!";
+                    feedback.style.color = "#f44336";
+                }
+            }
+
+            currentQuestion++;
+            setTimeout(() => {
+                feedback.textContent = "";
+                loadQuestion();
+            }, 1000);
+        }
+
+        function showCorrectAnswer() {
+            const newImage = "5.jpeg"; // New image for the last question
+            document.getElementById('correct-answer-image').innerHTML = `<img src="${newImage}" alt="Correct Answer" style="width: 100%; border-radius: 15px;">`;
+        }
+
+        function endGame() {
+            document.getElementById('last-question').classList.add('hidden');
+            document.getElementById('end').classList.remove('hidden');
+        }
+
+    </script>
+</body>
+
+</html>
