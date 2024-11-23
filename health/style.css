@@ -79,7 +79,7 @@ html, body {
 /* Responsive Design */
 @media only screen and (max-width: 600px) {
   .container {
-    font-size: 24px; /* Increased font size for small devices */
+    font-size: 32px; /* Increased font size for small devices */
     width: 80%; /* Text container width takes 80% of the screen width */
     left: 10%; /* Center the container horizontally */
     padding: 15px;
