@@ -39,6 +39,7 @@ html, body {
   color: white;
   padding: 20px;
   box-sizing: border-box;
+  font-size: 24px; /* Default font size */
 }
 
 .heart {
@@ -76,62 +77,66 @@ html, body {
   }
 }
 
-/* Responsive Design */
+/* Responsive Design for Small Devices */
 @media only screen and (max-width: 600px) {
   .container {
-    font-size: 32px; /* Increased font size for small devices */
+    font-size: 48px; /* Increased font size for small devices */
     width: 80%; /* Text container width takes 80% of the screen width */
     left: 10%; /* Center the container horizontally */
-    padding: 15px;
+    padding: 20px;
+    box-sizing: border-box;
   }
 
   .heart {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 
   .heart:before,
   .heart:after {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 }
 
+/* Responsive Design for Tablets */
 @media only screen and (max-width: 768px) {
   .container {
-    font-size: 20px; /* Font size for tablets */
+    font-size: 32px; /* Increased font size for tablets */
     width: 75%; /* Text container width takes 75% of the screen width */
     left: 12.5%; /* Center the container horizontally */
+    padding: 20px;
   }
 
   .heart {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 
   .heart:before,
   .heart:after {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 }
 
+/* Responsive Design for Larger Screens */
 @media only screen and (min-width: 1024px) {
   .container {
-    font-size: 24px; /* Font size for larger screens */
+    font-size: 48px; /* Larger font size for desktops */
     width: 60%; /* Text container width takes 60% of the screen width */
     left: 20%; /* Center the container horizontally */
     padding: 40px;
   }
 
   .heart {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
   }
 
   .heart:before,
   .heart:after {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
   }
 }
